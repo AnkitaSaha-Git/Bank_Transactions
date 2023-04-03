@@ -1,15 +1,23 @@
 package com.example.Bank.Transactions.Service;
 
+import com.example.Bank.Transactions.Model.RequestParam;
+import com.example.Bank.Transactions.Repo.AccountRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.example.Bank.Transactions.Entity.Account;
-
+@Service
 public class AccountService {
 
-    public String credit(Account account) throws Exception {
-        if (account.getBalance() > 100000000) {
-            throw new Exception("Account balance cannot go beyond 100000000")
-        } else {
 
+
+        @Autowired
+        private AccountRepo accountRepo;
+        public String creditAmount(String accountId,String userId, float amount) {
+            return accountRepo.credit(accountId,userId,amount);
+        }
+
+        public boolean checkUser(RequestParam requestParam) {
+            return accountRepo.checkUser(requestParam);
         }
     }
-}
+
